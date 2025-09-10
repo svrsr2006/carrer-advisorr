@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Advisor - Your Path to Success</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="container">
+            <div class="nav-brand">
+                <h2 class="nav-title">AI Career Advisor</h2>
+            </div>
+            <div class="nav-menu">
+                <button class="btn btn--secondary nav-btn" id="dashboardBtn" style="display:none;">Dashboard</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Landing Section -->
+        <section id="landing" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1 class="hero-title">AI Career Advisor</h1>
+                        <p class="hero-subtitle">Your Path to Success</p>
+                        <p class="hero-description">
+                            Discover your ideal career path with our AI-powered platform. Get personalized recommendations, 
+                            skills gap analysis, and learning roadmaps tailored specifically for Indian students.
+                        </p>
+                        <div class="hero-features">
+                            <div class="feature">
+                                <h4>🎯 Personalized Recommendations</h4>
+                                <p>AI-driven career matching based on your profile</p>
+                            </div>
+                            <div class="feature">
+                                <h4>📊 Skills Gap Analysis</h4>
+                                <p>Identify and bridge skill gaps for your dream career</p>
+                            </div>
+                            <div class="feature">
+                                <h4>📚 Learning Roadmaps</h4>
+                                <p>Curated courses and certifications for career growth</p>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary btn--lg" id="startAssessmentBtn">Start Your Assessment</button>
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/6dd01f0ced4f3686c84782e7bb3e5f99/389bafcc-056b-4a92-b771-b97f924307cc/9df2e90f.png" alt="AI Career Advisor Architecture" class="architecture-diagram">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Assessment Section -->
+        <section id="assessment" class="section">
+            <div class="container">
+                <div class="assessment-container">
+                    <div class="assessment-header">
+                        <h2>Career Assessment</h2>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressBar"></div>
+                        </div>
+                        <p class="progress-text">Step <span id="currentStep">1</span> of <span id="totalSteps">5</span></p>
+                    </div>
+
+                    <!-- Step 1: Personal Info -->
+                    <div class="assessment-step active" id="step1">
+                        <h3>Personal Information</h3>
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="studentName" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Age</label>
+                            <input type="number" class="form-control" id="studentAge" min="16" max="30" placeholder="18">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Education Level</label>
+                            <select class="form-control" id="educationLevel">
+                                <option value="">Select your education level</option>
+                                <option value="12th">12th Grade</option>
+                                <option value="undergraduate">Undergraduate</option>
+                                <option value="graduate">Graduate</option>
+                                <option value="postgraduate">Post Graduate</option>
+                            </select>
+                        </div>
+                        <div class="step-buttons">
+                            <button class="btn btn--primary" onclick="nextStep()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Academic Performance -->
+                    <div class="assessment-step" id="step2">
+                        <h3>Academic Background</h3>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Subjects</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Mathematics" name="subjects">
+                                    <span>Mathematics</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Science" name="subjects">
+                                    <span>Science</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Computer Science" name="subjects">
+                                    <span>Computer Science</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Commerce" name="subjects">
+                                    <span>Commerce</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Arts" name="subjects">
+                                    <span>Arts</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Economics" name="subjects">
+                                    <span>Economics</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Statistics" name="subjects">
+                                    <span>Statistics</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Engineering" name="subjects">
+                                    <span>Engineering</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Academic Performance</label>
+                            <select class="form-control" id="academicPerformance">
+                                <option value="">Select your performance level</option>
+                                <option value="excellent">Excellent (90%+)</option>
+                                <option value="good">Good (75-90%)</option>
+                                <option value="average">Average (60-75%)</option>
+                                <option value="improving">Improving (Below 60%)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Technical Skills Level</label>
+                            <select class="form-control" id="technicalSkills">
+                                <option value="">Select your technical skills level</option>
+                                <option value="beginner">Beginner - Basic computer knowledge</option>
+                                <option value="intermediate">Intermediate - Some programming/technical experience</option>
+                                <option value="advanced">Advanced - Strong technical background</option>
+                                <option value="expert">Expert - Professional technical skills</option>
+                            </select>
+                        </div>
+                        <div class="step-buttons">
+                            <button class="btn btn--outline" onclick="prevStep()">Previous</button>
+                            <button class="btn btn--primary" onclick="nextStep()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Interests -->
+                    <div class="assessment-step" id="step3">
+                        <h3>Interests & Hobbies</h3>
+                        <div class="form-group">
+                            <label class="form-label">What interests you the most?</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Technology" name="interests">
+                                    <span>Technology</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Mathematics" name="interests">
+                                    <span>Mathematics</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Science" name="interests">
+                                    <span>Science</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Arts & Design" name="interests">
+                                    <span>Arts & Design</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Business" name="interests">
+                                    <span>Business</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Healthcare" name="interests">
+                                    <span>Healthcare</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Environment" name="interests">
+                                    <span>Environment</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Gaming" name="interests">
+                                    <span>Gaming</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Social Media" name="interests">
+                                    <span>Social Media</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Research" name="interests">
+                                    <span>Research</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Finance" name="interests">
+                                    <span>Finance</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Education" name="interests">
+                                    <span>Education</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Agriculture" name="interests">
+                                    <span>Agriculture</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Sustainability" name="interests">
+                                    <span>Sustainability</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Learning Style</label>
+                            <select class="form-control" id="learningStyle">
+                                <option value="">Select your preferred learning style</option>
+                                <option value="hands-on">Hands-on practical learning</option>
+                                <option value="theoretical">Theoretical and conceptual</option>
+                                <option value="visual">Visual and interactive</option>
+                                <option value="collaborative">Collaborative group learning</option>
+                                <option value="self-paced">Self-paced online learning</option>
+                            </select>
+                        </div>
+                        <div class="step-buttons">
+                            <button class="btn btn--outline" onclick="prevStep()">Previous</button>
+                            <button class="btn btn--primary" onclick="nextStep()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Personality Traits -->
+                    <div class="assessment-step" id="step4">
+                        <h3>Personality Traits & Soft Skills</h3>
+                        <div class="form-group">
+                            <label class="form-label">Which traits best describe you?</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Analytical" name="personality">
+                                    <span>Analytical</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Creative" name="personality">
+                                    <span>Creative</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Social" name="personality">
+                                    <span>Social</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Detail-oriented" name="personality">
+                                    <span>Detail-oriented</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Leadership" name="personality">
+                                    <span>Leadership</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Problem-solving" name="personality">
+                                    <span>Problem-solving</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Communication" name="personality">
+                                    <span>Communication</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Technical aptitude" name="personality">
+                                    <span>Technical aptitude</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Adaptability" name="personality">
+                                    <span>Adaptability</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Teamwork" name="personality">
+                                    <span>Teamwork</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Innovation" name="personality">
+                                    <span>Innovation</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Critical thinking" name="personality">
+                                    <span>Critical thinking</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Work Environment Preference</label>
+                            <select class="form-control" id="workStyle">
+                                <option value="">Select your work style preference</option>
+                                <option value="structured">Structured and organized</option>
+                                <option value="flexible">Flexible and adaptable</option>
+                                <option value="fast-paced">Fast-paced and dynamic</option>
+                                <option value="collaborative">Collaborative and team-based</option>
+                                <option value="independent">Independent and autonomous</option>
+                            </select>
+                        </div>
+                        <div class="step-buttons">
+                            <button class="btn btn--outline" onclick="prevStep()">Previous</button>
+                            <button class="btn btn--primary" onclick="nextStep()">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Career Preferences -->
+                    <div class="assessment-step" id="step5">
+                        <h3>Career Preferences & Goals</h3>
+                        <div class="form-group">
+                            <label class="form-label">Expected Salary Range (Annual)</label>
+                            <select class="form-control" id="salaryExpectation">
+                                <option value="">Select salary range</option>
+                                <option value="3-6">₹3-6 lakhs</option>
+                                <option value="6-10">₹6-10 lakhs</option>
+                                <option value="10-15">₹10-15 lakhs</option>
+                                <option value="15-25">₹15-25 lakhs</option>
+                                <option value="25+">₹25+ lakhs</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Work Environment</label>
+                            <select class="form-control" id="workEnvironment">
+                                <option value="">Select work environment</option>
+                                <option value="office">Traditional Office</option>
+                                <option value="remote">Remote Work</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="travel">Travel-based</option>
+                                <option value="startup">Startup Environment</option>
+                                <option value="corporate">Corporate Environment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Career Growth Priority</label>
+                            <select class="form-control" id="careerGrowth">
+                                <option value="">Select your priority</option>
+                                <option value="skill-development">Skill Development & Learning</option>
+                                <option value="salary-growth">Salary & Financial Growth</option>
+                                <option value="work-life-balance">Work-Life Balance</option>
+                                <option value="leadership">Leadership & Management</option>
+                                <option value="innovation">Innovation & Creativity</option>
+                                <option value="social-impact">Social Impact & Purpose</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Industry Sectors</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Technology" name="industries">
+                                    <span>Technology & IT</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Finance" name="industries">
+                                    <span>Finance & Banking</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Healthcare" name="industries">
+                                    <span>Healthcare</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="E-commerce" name="industries">
+                                    <span>E-commerce & Retail</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Education" name="industries">
+                                    <span>Education & EdTech</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Manufacturing" name="industries">
+                                    <span>Manufacturing</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Consulting" name="industries">
+                                    <span>Consulting</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" value="Startups" name="industries">
+                                    <span>Startups & Innovation</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="step-buttons">
+                            <button class="btn btn--outline" onclick="prevStep()">Previous</button>
+                            <button class="btn btn--primary" onclick="generateRecommendations()">Generate Recommendations</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations" class="section">
+            <div class="container">
+                <div class="recommendations-header">
+                    <h2>Your Personalized Career Recommendations</h2>
+                    <p>Based on your assessment, here are the top career matches for you:</p>
+                </div>
+                <div class="recommendations-grid" id="recommendationsGrid">
+                    <!-- Recommendations will be populated by JavaScript -->
+                </div>
+                <div class="market-insights">
+                    <h3>Indian Market Insights</h3>
+                    <div class="insights-grid">
+                        <div class="insight-card">
+                            <h4>🚀 Top Growing Sectors</h4>
+                            <div class="insight-content" id="growingSectors">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <h4>💰 Salary Trends</h4>
+                            <div class="insight-content" id="salaryTrends">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <h4>🔧 Skills in Demand</h4>
+                            <div class="insight-content" id="skillsInDemand">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <h4>🌟 Emerging Roles</h4>
+                            <div class="insight-content" id="emergingRoles">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-actions">
+                    <button class="btn btn--primary" onclick="showSkillsGap()">Analyze Skills Gap</button>
+                    <button class="btn btn--secondary" onclick="showChat()">Ask AI Assistant</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Gap Analysis Section -->
+        <section id="skillsGap" class="section">
+            <div class="container">
+                <div class="skills-header">
+                    <h2>Skills Gap Analysis</h2>
+                    <p>Understand what skills you need to develop for your chosen career path</p>
+                </div>
+                <div class="skills-content">
+                    <div class="selected-career" id="selectedCareer">
+                        <!-- Selected career info will be populated -->
+                    </div>
+                    <div class="skills-chart-container">
+                        <div class="chart-container" style="position: relative; height: 400px;">
+                            <canvas id="skillsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="skills-recommendations" id="skillsRecommendations">
+                        <!-- Skills recommendations will be populated -->
+                    </div>
+                </div>
+                <div class="section-actions">
+                    <button class="btn btn--primary" onclick="generateLearningPath()">Generate Learning Path</button>
+                    <button class="btn btn--outline" onclick="showRecommendations()">Back to Recommendations</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Path Section -->
+        <section id="learningPath" class="section">
+            <div class="container">
+                <div class="learning-header">
+                    <h2>Your Personalized Learning Path</h2>
+                    <p>Curated courses and certifications to bridge your skills gap</p>
+                </div>
+                <div class="learning-timeline" id="learningTimeline">
+                    <!-- Learning timeline will be populated -->
+                </div>
+                <div class="section-actions">
+                    <button class="btn btn--secondary" onclick="showChat()">Get Learning Advice</button>
+                    <button class="btn btn--outline" onclick="showSkillsGap()">Back to Skills Analysis</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Chat Section -->
+        <section id="aiChat" class="section">
+            <div class="container">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h3>AI Career Assistant</h3>
+                        <p>Ask me anything about your career path!</p>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai-message">
+                            <div class="message-content">
+                                <p>Hello! I'm your AI career assistant. I've analyzed your profile and I'm here to help you with any questions about your career path, skills development, or learning recommendations. What would you like to know?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" class="form-control" id="chatInput" placeholder="Ask your question...">
+                        <button class="btn btn--primary" onclick="sendMessage()">Send</button>
+                    </div>
+                    <div class="chat-suggestions">
+                        <button class="suggestion-btn" onclick="askSuggestion('What skills should I focus on first?')">What skills should I focus on first?</button>
+                        <button class="suggestion-btn" onclick="askSuggestion('How long will it take to become job-ready?')">How long will it take to become job-ready?</button>
+                        <button class="suggestion-btn" onclick="askSuggestion('What are the job prospects in my field?')">What are the job prospects in my field?</button>
+                    </div>
+                </div>
+                <div class="section-actions">
+                    <button class="btn btn--outline" onclick="showDashboard()">Go to Dashboard</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Your Career Dashboard</h2>
+                    <p>Track your progress and manage your career journey</p>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h4>Top Career Match</h4>
+                        <div id="topCareerMatch">
+                            <!-- Top career match will be populated -->
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h4>Learning Progress</h4>
+                        <div class="progress-stats" id="learningProgress">
+                            <div class="stat">
+                                <span class="stat-value">0</span>
+                                <span class="stat-label">Courses Planned</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">0%</span>
+                                <span class="stat-label">Skills Acquired</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h4>Next Steps</h4>
+                        <div id="nextSteps">
+                            <ul>
+                                <li>Complete your skills assessment</li>
+                                <li>Start your first recommended course</li>
+                                <li>Connect with industry mentors</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn--primary" onclick="showRecommendations()">View All Recommendations</button>
+                    <button class="btn btn--secondary" onclick="showSkillsGap()">Skills Analysis</button>
+                    <button class="btn btn--secondary" onclick="showLearningPath()">Learning Path</button>
+                    <button class="btn btn--outline" onclick="showChat()">AI Assistant</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
